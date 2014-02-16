@@ -1,4 +1,3 @@
-
 (load-file "~/Downloads/cedet-1.0pre7/common/cedet.el")
 (global-ede-mode 1)
 
@@ -7,7 +6,7 @@
 
 (ede-cpp-root-project "Test"
 		:name "TestProject"
-		:file "~/.emacs"
+		:file "/gpfs/main/home/yanli/Desktop/CS195v/old/old_gpusupport/projects/life/Makefile"
 		:include-path '("/"
 				)
 		:system-include-path '("/usr/include"
@@ -28,7 +27,14 @@
 
 
 (setq ecb-tip-of-the-day nil)
-(setq ecb-source-path (quote ("~/Desktop" "Desktop")))
+(setq ecb-source-path '("/gpfs/main/home/yanli/"))
+;; if we activate ECB first time then we display the node "First steps" of
+;; the online-manual
+(ignore-errors
+    (when (null ecb-source-path)
+        (let ((ecb-show-help-format 'info))
+            (ecb-show-help)
+            (Info-goto-node "First steps"))))
 
 ;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
 ;; ;(global-srecode-minor-mode 1)
@@ -38,10 +44,10 @@
 ;(require 'semantic-gcc)
 
 ;; ;; set the color theme
-(add-to-list 'load-path "~/Downloads/colortheme/")
-(load-file "~/Downloads/colortheme/color-theme.el")
-;;(require 'color-theme)
+(require 'color-theme)
 (color-theme-initialize)
+(color-theme-blue-sea)
+(color-theme-blue-mood)
 (color-theme-charcoal-black)
 ;; ;;
 
@@ -49,8 +55,8 @@
 (global-linum-mode t)
 ;; ;;
 
-;;(require 'setnu)
-;;(setnu-mode t)
+(require 'setnu)
+(setnu-mode t)
 
 
 (setq truncate-partial-width-windows nil)
@@ -167,18 +173,6 @@
                                            nil
                                            'fullboth)))
 (global-set-key [f11] 'toggle-fullscreen)
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40"))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
 
 (toggle-fullscreen)
 
@@ -187,7 +181,21 @@
 (global-set-key (kbd "C-x q") 'replace-string)
 
 (add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.glsl$" . c-mode))
 
 ;; toggle bar
- (scroll-bar-mode 1)
-(set-scroll-bar-mode 'right)
+;; (scroll-bar-mode 1)
+;;(set-scroll-bar-mode 'right)
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-add-path-for-not-matching-files (quote (nil)))
+ '(ecb-options-version "2.40"))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
